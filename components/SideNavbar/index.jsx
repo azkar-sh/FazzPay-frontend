@@ -17,35 +17,41 @@ export default function SideNavbar() {
     <>
       <div className="container">
         <div className="d-flex flex-column">
-          <div className="d-flex align-items-center my-3">
+          <div className="d-flex align-items-center my-3 text-left">
             <Image src={gridIcon} alt="grid-icon" />
-            <button className="btn" onClick={() => handleNav("/home")}>
+            <button
+              className="btn w-100 text-start"
+              onClick={() => handleNav("/home")}
+            >
               Dashboard
             </button>
           </div>
 
           <div className="d-flex align-items-center">
             <Image src={arrowUp} alt="grid-icon" />
-            <button className="btn" onClick={() => handleNav("/transfer")}>
+            <button
+              className="btn w-100 text-start"
+              onClick={() => handleNav("/transfer")}
+            >
               Transfer
             </button>
           </div>
 
           <div className="d-flex align-items-center my-3">
             <Image src={plusIcon} alt="grid-icon" />
-            <button className="btn">Top Up</button>
+            <button className="btn w-100 text-start">Top Up</button>
           </div>
 
           <div className="d-flex align-items-center">
             <Image src={userIcon} alt="grid-icon" />
-            <button className="btn">Profile</button>
+            <button className="btn w-100 text-start">Profile</button>
           </div>
         </div>
 
         <div className="d-flex flex-column">
           <div className="d-flex align-items-center">
             <Image src={gridIcon} alt="grid-icon" />
-            <button className="btn">Logout</button>
+            <button className="btn w-100 text-start">Logout</button>
           </div>
         </div>
       </div>

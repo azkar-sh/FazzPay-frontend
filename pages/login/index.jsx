@@ -3,8 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
 import { useState } from "react";
+import axiosClient from "utils/axios";
+import Cookies from "js-cookie";
 
-//Images
+//Imagess
 import authBackground from "../../assets/images/auth-background.png";
 
 export default function Login() {
@@ -17,14 +19,23 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
+  const handleSubmit = async () => {
+    try {
+      const result = await axiosClient.post("/auth/login", form);
+      Cookies.set("token", result.data.data.token);
+      Cookies.set("user", result.data.data.user);
+      alert(result.data.msg);
+      Router.push("/home");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleNavigate = (path) => {
     Router.push(`/${path}`);
   };
+
+  // console.log(process.env.URL_BACKEND);
 
   return (
     <>

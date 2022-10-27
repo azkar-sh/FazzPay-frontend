@@ -25,7 +25,11 @@ export default function LandingPage() {
       <div className="container">
         <div className="d-flex align-items-center">
           <div className="col-6">
-            <Image src={landingBanner} alt="fazzpay-banner" />
+            <Image
+              src={landingBanner}
+              alt="fazzpay-banner"
+              layout="responsive"
+            />
           </div>
           <div className="col-6">
             <p className="h1 mb-3 fw-bold">Awesome App</p>
@@ -103,14 +107,57 @@ export default function LandingPage() {
             </div>
             <div className="col-6">
               <h1 className="fw-bold mb-5">
-                All the Great <br /> FazzPay Features
+                All the <span className="color-blue">Great</span> <br /> FazzPay
+                Features
               </h1>
-              <h5 className="mb-5">
-                We bring you a mobile app for banking problems that oftenly
-                wasting much of your times.
-              </h5>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="container my-5">
+        <div className="text-center">
+          <h1>
+            What Users are <span className="color-blue fw-bold"> Saying.</span>{" "}
+          </h1>
+          <h6 className="my-4">
+            We have some great features from the application and it’s totally
+            free <br /> to use by all users around the world.
+          </h6>
+          <div className="d-flex align-items-center">
+            <div className="col-2 text-center">
+              <button className="btn">
+                <Image src={phoneRounded} alt="phone-rounded" />
+              </button>
+            </div>
+            <div className="col-8 text-center bg-white rounded-3 py-5 px-3">
+              <Image src={lockRounded} alt="lock-rounded" />
+              <h5 className="my-4">Alex Hansiburg</h5>
+              <h6>Designer</h6>
+              <small>
+                “This is the most outstanding app that I’ve ever try in my live,
+                this app is such an amazing masterpiece and it’s suitable for
+                you who is bussy with their bussiness and must transfer money to
+                another person aut there. Just try this app and see the power!”
+              </small>
+            </div>
+            <div className="col-2 text-center">
+              <button className="btn">
+                <Image src={downloadRounded} alt="download-rounded" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-fluid background-blue mt-5">
+        <div className="container pt-5 pb-2 text-white">
+          <h1 className="fw-bold mb-5">Fazzpay</h1>
+          <small>
+            Simplify financial needs and saving <br /> much time in banking
+            needs with <br /> one single app.
+          </small>
+          <hr />
         </div>
       </div>
     </Layout>

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
-import { useState } from "react";
+import Cookies from "js-cookie";
+import axiosClient from "utils/axios";
 
 // Images
 import authBackground from "../../assets/images/auth-background.png";
@@ -17,9 +18,14 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
+  const handleSubmit = async () => {
+    try {
+      const result = await axiosClient.post("/auth/register", form);
+      alert(result.data.msg);
+      Router.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleNavigate = (path) => {
@@ -58,14 +64,14 @@ export default function Register() {
 
               <input
                 type="text"
-                name="firstname"
+                name="firstName"
                 className="form-control mb-3 mt-5 border-0 border-bottom"
                 placeholder="Enter your firstname"
                 onChange={handleChange}
               />
               <input
                 type="text"
-                name="lastname"
+                name="lastName"
                 className="form-control mb-3  border-0 border-bottom"
                 placeholder="Enter your lastname"
                 onChange={handleChange}
