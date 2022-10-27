@@ -2,14 +2,18 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
-import { useState } from "react";
 import axiosClient from "utils/axios";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { getUserDataById } from "stores/action/user";
+import { login } from "stores/action/auth";
 
 //Imagess
 import authBackground from "../../assets/images/auth-background.png";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [form, setForm] = useState({});
 
   const handleChange = (e) => {
@@ -19,23 +23,20 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = async () => {
-    try {
-      const result = await axiosClient.post("/auth/login", form);
-      Cookies.set("token", result.data.data.token);
-      Cookies.set("user", result.data.data.user);
-      alert(result.data.msg);
-      Router.push("/home");
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = () => {
+    dispatch(login(form))
+      .then((response) => {
+        alert(response.value.data.msg);
+        dispatch(getUserDataById(response.value.data.data.id));
+        Cookies.set("token", response.value.data.data.token);
+        Cookies.set("id", response.value.data.data.id);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleNavigate = (path) => {
     Router.push(`/${path}`);
   };
-
-  // console.log(process.env.URL_BACKEND);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "layout";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,21 +9,52 @@ import TransactionHistory from "components/TransactionHistory";
 
 import arrowUp from "../../assets/icons/arrow-up.png";
 import plusIcon from "../../assets/icons/plus-icon.png";
+import { getUserDataById } from "stores/action/user";
+import { getHistoryData } from "stores/action/history";
+
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 
 export default function Home() {
+  const [user, setUser] = useState({});
+  const [history, setHistory] = useState({});
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    try {
+      dispatch(getUserDataById(Cookies.get("id")))
+        .then((res) => setUser(res.value.data.data))
+        .catch((err) => console.log(err));
+
+      dispatch(getHistoryData(1, 20, "MONTH"))
+        .then((res) => setHistory(res.value.data.data))
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // console.log(user);
+  // console.log(history);
+
   return (
     <Layout>
       <main className="container my-5">
         <div className="row">
           {/* Side Navbar */}
-          <div className="col-3 border rounded-3">
+          <div className="col-3 border rounded-3 bg-white shadow">
             <SideNavbar />
           </div>
 
           <div className="col-9">
             <div className="d-flex flex-column">
               {/* Balance */}
-              <div className="col-12 rounded-3 mb-3 background-blue text-white">
+              <div className="col-12 rounded-3 mb-3 background-blue text-white shadow">
                 <div className="row py-3 px-3">
                   <div className="col-9">
                     <small>Balance</small>
@@ -55,7 +86,7 @@ export default function Home() {
 
               {/* Transaction */}
               <div className="d-flex justfiy-content-evenly">
-                <div className="col-6 border rounded-3 px-3 py-3 me-1">
+                <div className="col-6 border rounded-3 px-3 py-3 me-1 shadow bg-white">
                   <div className="row">
                     <div className="col-6">
                       <p>Income</p>
@@ -67,7 +98,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="col-6 border rounded-3 px-3 py-3 ms-1">
+                <div className="col-6 border rounded-3 px-3 py-3 ms-1 shadow bg-white">
                   <h6 className="mb-4">
                     <Link href={"history"}>Transaction History</Link>{" "}
                   </h6>

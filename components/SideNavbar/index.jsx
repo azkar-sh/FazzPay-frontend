@@ -44,7 +44,12 @@ export default function SideNavbar() {
 
           <div className="d-flex align-items-center">
             <Image src={userIcon} alt="grid-icon" />
-            <button className="btn w-100 text-start">Profile</button>
+            <button
+              className="btn w-100 text-start"
+              onClick={() => handleNav("/user")}
+            >
+              Profile
+            </button>
           </div>
         </div>
 
