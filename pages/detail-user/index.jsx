@@ -24,8 +24,6 @@ export default function DetailUser() {
       dispatch(getUserDataById(Cookies.get("id")))
         .then((res) => setUser(res.value.data.data))
         .catch((err) => console.log(err));
-
-      dispatch();
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +34,7 @@ export default function DetailUser() {
   };
 
   const imageUser = process.env.URL_CLOUDINARY;
-  console.log(user.image);
+  // console.log(user.image);
 
   return (
     <Layout>

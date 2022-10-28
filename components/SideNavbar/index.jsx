@@ -7,10 +7,21 @@ import gridIcon from "../../assets/icons/grid-icon.png";
 import arrowUp from "../../assets/icons/arrow-up.png";
 import plusIcon from "../../assets/icons/plus-icon.png";
 import userIcon from "../../assets/icons/user-icon.png";
+import Cookies from "js-cookie";
 
 export default function SideNavbar() {
   const handleNav = (path) => {
     Router.push(path);
+  };
+
+  const handleLogout = () => {
+    const logout = window.confirm("Do you want to log out?");
+    if (logout) {
+      Cookies.remove("token", "id", "receiverId");
+      localStorage.clear();
+      Router.push("");
+    } else {
+    }
   };
 
   return (
@@ -53,10 +64,12 @@ export default function SideNavbar() {
           </div>
         </div>
 
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column my-auto">
           <div className="d-flex align-items-center">
             <Image src={gridIcon} alt="grid-icon" />
-            <button className="btn w-100 text-start">Logout</button>
+            <button className="btn w-100 text-start" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </div>
       </div>

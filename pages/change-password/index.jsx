@@ -35,7 +35,7 @@ export default function ChangePassword() {
   };
 
   const imageUser = process.env.URL_CLOUDINARY;
-  console.log(user.image);
+  // console.log(user.image);
 
   return (
     <Layout>

@@ -36,7 +36,7 @@ export default function UserProfile() {
   };
 
   const imageUser = process.env.URL_CLOUDINARY;
-  console.log(user.image);
+  // console.log(user.image);
 
   return (
     <Layout>

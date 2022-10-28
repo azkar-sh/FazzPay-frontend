@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
-import axiosClient from "utils/axios";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -30,6 +29,7 @@ export default function Login() {
         dispatch(getUserDataById(response.value.data.data.id));
         Cookies.set("token", response.value.data.data.token);
         Cookies.set("id", response.value.data.data.id);
+        Router.push("/home");
       })
       .catch((error) => console.log(error));
   };
