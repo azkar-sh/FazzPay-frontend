@@ -35,8 +35,8 @@ export default function UserProfile() {
     Router.push(path);
   };
 
-  const imageUser = process.env.URL_CLOUDINARY;
-  // console.log(user.image);
+  const imageUser = `${process.env.URL_CLOUDINARY}/${user.image}`;
+  const imageDefault = `https://ui-avatars.com/api/?name=${user.firstName}&background=random&size=44`;
 
   return (
     <Layout>
@@ -49,12 +49,38 @@ export default function UserProfile() {
 
           <div className="col-8 border rounded-3 px-3 py-3 ms-3 text-center bg-white shadow">
             <div className="d-flex flex-column">
-              <Image src={imageUser} alt="image-user" width={50} height={50} />
+              <div>
+                {user.image === null ? (
+                  <>
+                    <Image
+                      loader={() => imageDefault}
+                      src={imageDefault}
+                      alt="image-user"
+                      width={75}
+                      height={75}
+                      className="rounded-3"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      loader={() => imageUser}
+                      src={imageUser}
+                      alt="image-user"
+                      width={75}
+                      height={75}
+                      className="rounded-3"
+                    />
+                  </>
+                )}
+              </div>
               <button className="btn">Edit</button>
-              <h6>
+              <h5>
                 {user.firstName} {user.lastName}
-              </h6>
-              <h6 className="mb-5">{user.noTelp}</h6>
+              </h5>
+              <small className="mb-5">
+                {user.noTelp ? user.noTelp : "Phone number not updated"}
+              </small>
               <button
                 className="btn btn-secondary mb-3 py-2"
                 onClick={() => handleNav("detail-user")}

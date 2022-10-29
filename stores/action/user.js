@@ -15,3 +15,10 @@ export const getUserDataById = (id) => {
     payload: axiosClient.get(`/user/profile/${id}`),
   };
 };
+
+export const getUserBalance = (id) => {
+  return {
+    type: "GET_USER_BALANCE",
+    payload: axiosClient.get(`/dashboard/${id}`),
+  };
+};

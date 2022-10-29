@@ -22,14 +22,10 @@ export default function Header() {
       dispatch(getUserDataById(Cookies.get("id")))
         .then((res) => setUser(res.value.data.data))
         .catch((err) => console.log(err));
-
-      dispatch();
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(user);
 
   const isLogin = Cookies.get("token");
 
@@ -37,8 +33,8 @@ export default function Header() {
     router.push(`/${path}`);
   };
 
-  const imageUser = process.env.URL_CLOUDINARY;
-  // console.log(user.image);
+  const imageUser = `${process.env.URL_CLOUDINARY}/${user.image}`;
+  const imageDefault = `https://ui-avatars.com/api/?name=${user.firstName}&background=random&size=44`;
 
   return (
     <header>
@@ -48,11 +44,36 @@ export default function Header() {
           {isLogin ? (
             <>
               <div
-                className="d-flex align-items-center"
+                className="d-flex align-items-center link-selected"
                 onClick={() => handleNav("/home")}
               >
-                <div className="col-2 me-3 border rounded">Image</div>
-                <div className="col-8 me-2">
+                <div className="col-2 me-3 rounded">
+                  {" "}
+                  {user.image === null ? (
+                    <>
+                      <Image
+                        loader={() => imageDefault}
+                        src={imageDefault}
+                        alt="image-user"
+                        width={100}
+                        height={100}
+                        className="rounded-3"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Image
+                        loader={() => imageUser}
+                        src={imageUser}
+                        alt="image-user"
+                        width={100}
+                        height={100}
+                        className="rounded-3"
+                      />
+                    </>
+                  )}
+                </div>
+                <div className="col-8 me-2 mt-2">
                   <p className="p-transaction fw-bold">
                     {user.firstName} {user.lastName}
                   </p>{" "}

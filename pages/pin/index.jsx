@@ -9,22 +9,23 @@ import PinInput from "react-pin-input";
 //Imagess
 import authBackground from "../../assets/images/auth-background.png";
 
-export default function Login() {
+export default function Pin() {
   const [form, setForm] = useState({});
+  const userId = Cookies.get("id");
 
   const handleChange = (e) => {
     setForm({
       ...form,
-      pin: e,
+      pin: e, // just need pin value
     });
   };
 
   const handleSubmit = async () => {
     try {
-      //   const result = await axiosClient.patch("/auth/pin", form);
-      //   alert(result.data.msg);
+      const result = await axiosClient.patch(`/user/pin/${userId}`, form);
+      alert(result.data.msg);
       console.log(form);
-      //   Router.push("/home");
+      Router.push("/pin/updated-pin");
     } catch (error) {
       console.log(error);
     }

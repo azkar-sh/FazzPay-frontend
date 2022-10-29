@@ -45,7 +45,7 @@ export default function Transfer() {
           </div>
 
           <div className="col-8 border rounded-3 px-3 py-3 ms-3 bg-white shadow">
-            <h6 className="mb-4">Search Receiver</h6>
+            <h4 className="mb-4">Search Receiver</h4>
             <input
               type="text"
               className="form-control mb-3"

@@ -14,6 +14,7 @@ import { getHistoryData } from "stores/action/history";
 
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
+import Router from "next/router";
 
 export default function Home() {
   const [user, setUser] = useState({});
@@ -39,8 +40,9 @@ export default function Home() {
     }
   };
 
-  // console.log(user);
-  // console.log(history);
+  const handleNav = (path) => {
+    Router.push(`/${path}`);
+  };
 
   return (
     <Layout>
@@ -62,7 +64,10 @@ export default function Home() {
                     <small>+62 813 9387 7946</small>
                   </div>
                   <div className="col-3">
-                    <button className="btn btn-outline-primary d-flex align-items-center w-75 justify-content-center btn-balance">
+                    <button
+                      className="btn btn-outline-primary d-flex align-items-center w-75 justify-content-center btn-balance"
+                      onClick={() => handleNav("transfer")}
+                    >
                       <Image
                         src={arrowUp}
                         alt="grid-icon"

@@ -2,10 +2,12 @@ import "../styles/globals.css";
 import "../styles/auth.css";
 import "../styles/home.css";
 import "../styles/landing.css";
+import "../styles/transfer.css";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
+
 import Script from "next/script";
 
 import { Provider } from "react-redux";

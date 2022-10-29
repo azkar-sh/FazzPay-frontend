@@ -1,8 +1,6 @@
 import React from "react";
 import Layout from "layout";
-import Image from "next/image";
 import Cookies from "js-cookie";
-import Router from "next/router";
 import { useDispatch } from "react-redux";
 import { getUserDataById } from "stores/action/user";
 import { useEffect } from "react";
@@ -29,13 +27,6 @@ export default function DetailUser() {
     }
   };
 
-  const handleNav = (path) => {
-    Router.push(path);
-  };
-
-  const imageUser = process.env.URL_CLOUDINARY;
-  // console.log(user.image);
-
   return (
     <Layout>
       <main className="container my-5">
@@ -47,27 +38,29 @@ export default function DetailUser() {
 
           <div className="col-8 border rounded-3 px-3 py-3 ms-3 bg-white shadow">
             <div className="d-flex flex-column">
-              <p className="fw-bold mb-2">Personal Information</p>
+              <p className="fw-bold mb-2 h4">Personal Information</p>
               <p className="text-muted mb-5">
                 We got your personal information from the sign up proccess. If
                 you want to make changes on your information, contact our
                 support.
               </p>
               <div className="border rounded-3 d-flex flex-column mb-3 px-3 py-2 shadow">
-                <p className="fw-bold mb-2">First Name</p>
-                <p className="p-transaction">{user.firstName}</p>
+                <p className="mb-2">First Name</p>
+                <p className="p-transaction fw-bold">{user.firstName}</p>
               </div>
               <div className="border rounded-3 d-flex flex-column mb-3 px-3 py-2 shadow">
-                <p className="fw-bold mb-2">Last Name</p>
-                <p className="p-transaction">{user.lastName}</p>
+                <p className=" mb-2">Last Name</p>
+                <p className="p-transaction  fw-bold">{user.lastName}</p>
               </div>
               <div className="border rounded-3 d-flex flex-column mb-3 px-3 py-2 shadow">
-                <p className="fw-bold mb-2">Verified Email</p>
-                <p className="p-transaction">{user.email}</p>
+                <p className="mb-2">Verified Email</p>
+                <p className="p-transaction  fw-bold">{user.email}</p>
               </div>
               <div className="border rounded-3 d-flex flex-column mb-3 px-3 py-2 shadow">
-                <p className="fw-bold mb-2">Phone Number</p>
-                <p className="p-transaction">{user.noTelp}</p>
+                <p className="mb-2">Phone Number</p>
+                <p className="p-transaction fw-bold">
+                  {user.noTelp ? user.noTelp : "Not updated"}
+                </p>
               </div>
             </div>
           </div>

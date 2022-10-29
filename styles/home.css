@@ -18,3 +18,8 @@ hr {
   margin-top: 25px;
   border: 0.5px solid black;
 }
+
+.link-selected:hover {
+  color: blue;
+  cursor: pointer;
+}

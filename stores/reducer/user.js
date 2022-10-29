@@ -40,6 +40,24 @@ const user = (state = initialState, action) => {
         data: {},
       };
 
+    case "GET_USER_BALANCE_PENDING":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "GET_USER_BALANCE_REJECTED":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "GET_USER_BALANCE_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+      };
+
     default:
       return state;
   }

@@ -19,7 +19,7 @@ export default function SideNavbar() {
     if (logout) {
       Cookies.remove("token", "id", "receiverId");
       localStorage.clear();
-      Router.push("");
+      Router.push("login");
     } else {
     }
   };

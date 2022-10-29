@@ -11,12 +11,10 @@ import { getUserBalance } from "stores/action/user";
 
 //components
 import SideNavbar from "components/SideNavbar";
-import { useRouter } from "next/router";
 
 //images
 
-export default function TransferDetail() {
-  const router = useRouter();
+export default function Confimation() {
   const [data, setData] = useState({});
   const [balance, setBalance] = useState({});
   const [form, setForm] = useState({});
@@ -53,9 +51,7 @@ export default function TransferDetail() {
   };
 
   const handleSubmit = () => {
-    Cookies.set("amount", form.amount);
-    Cookies.set("notes", form.notes);
-    router.push("/confirmation");
+    console.log(form);
   };
 
   const totalBalance = balance.totalIncome - balance.totalExpense;
@@ -76,7 +72,7 @@ export default function TransferDetail() {
           </div>
 
           <div className="col-8 border rounded-3 px-3 py-3 ms-3 bg-white shadow">
-            <h4 className="mb-4">Transfer Money</h4>
+            <h4 className="mb-4">Transfer Confirmation</h4>
 
             <div className="overflow-auto vh-100">
               <div className="d-flex flex-column flex-wrap">
@@ -117,35 +113,7 @@ export default function TransferDetail() {
                 </div>
               </div>
               {/* Transfer Form */}
-              <p className="mt-3">
-                Type the amount you want to transfer and then press continue to
-                the next step
-              </p>
-              <div className="col-12 d-flex flex-column align-items-center my-5">
-                <input
-                  type="number"
-                  name="amount"
-                  className="bg-white border-0 transfer-input"
-                  placeholder="0.00"
-                  min="10000"
-                  max={totalBalance}
-                  onChange={handleChange}
-                />
-                <p className="fw-bold">Rp. {totalBalances} Available</p>
-                <input
-                  type="text"
-                  name="notes"
-                  placeholder="Add note"
-                  className="note-input border-0 border-bottom"
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-primary background-blue w-25"
-                  onClick={handleSubmit}
-                >
-                  Continue
-                </button>
-              </div>
+              <p className="mt-3 h5">Details</p>
             </div>
           </div>
         </div>

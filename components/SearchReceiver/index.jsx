@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import personIcon from "../../assets/icons/person-icon.png";
 import Router from "next/router";
 import Cookies from "js-cookie";
 
@@ -11,24 +10,47 @@ export default function TransactionHistory(props) {
     Cookies.set("receiverId", receiverId);
   };
 
+  const imageUser = `${process.env.URL_CLOUDINARY}/${props.data.image}`;
+  const imageDefault = `https://ui-avatars.com/api/?name=${props.data.firstName}&background=random&size=44`;
+
   return (
     <>
-      <div className="border mb-4 d-flex py-2 px-3 rounded shadow">
+      <div className="d-flex py-2 px-3 rounded mb-4 border shadow">
         <div className="col-1">
-          <Image
-            src={personIcon}
-            alt="image-transaction"
-            className="border rounded-3"
-            width={50}
-            height={50}
-            layout="fixed"
-          />
+          {props.data.image === null ? (
+            <>
+              <Image
+                loader={() => imageDefault}
+                src={imageDefault}
+                alt="image-user"
+                width={50}
+                height={50}
+                className="rounded-3"
+              />
+            </>
+          ) : (
+            <>
+              <Image
+                loader={() => imageUser}
+                src={imageUser}
+                alt="image-user"
+                width={50}
+                height={50}
+                className="rounded-3"
+              />
+            </>
+          )}
         </div>
         <div className="col-10 ms-2">
-          <p className="p-transaction fw-bold" onClick={handleDetail}>
+          <p
+            className="p-transaction fw-bold link-selected"
+            onClick={handleDetail}
+          >
             {props.data.firstName} {props.data.lastName}
           </p>
-          <p className="p-transaction">{props.data.noTelp}</p>
+          <p className="p-transaction">
+            {props.data.noTelp ? props.data.noTelp : "-"}
+          </p>
         </div>
       </div>
     </>
