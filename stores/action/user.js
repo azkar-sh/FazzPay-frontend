@@ -22,3 +22,10 @@ export const getUserBalance = (id) => {
     payload: axiosClient.get(`/dashboard/${id}`),
   };
 };
+
+export const updateUserImage = (id, data) => {
+  return {
+    type: "UPDATE_USER_IMAGE",
+    payload: axiosClient.patch(`/user/image/${id}`, data),
+  };
+};

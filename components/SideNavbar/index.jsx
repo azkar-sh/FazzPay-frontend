@@ -27,7 +27,7 @@ export default function SideNavbar() {
   return (
     <>
       <div className="container">
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column" style={{ height: "75vh" }}>
           <div className="d-flex align-items-center my-3 text-left">
             <Image src={gridIcon} alt="grid-icon" />
             <button

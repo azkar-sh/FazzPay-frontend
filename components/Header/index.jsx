@@ -38,9 +38,9 @@ export default function Header() {
 
   return (
     <header>
-      <nav class="navbar bg-light py-3 shadow">
-        <div class="container rounded-3">
-          <a class="navbar-brand color-blue fw-bold">FazzPay</a>
+      <nav className="navbar bg-light py-3 shadow">
+        <div className="container rounded-3">
+          <a className="navbar-brand color-blue fw-bold">FazzPay</a>
           {isLogin ? (
             <>
               <div

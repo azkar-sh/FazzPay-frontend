@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "layout";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import PinInput from "react-pin-input";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -11,6 +12,7 @@ import { getUserBalance } from "stores/action/user";
 
 //components
 import SideNavbar from "components/SideNavbar";
+import currency from "utils/currency";
 
 //images
 
@@ -45,8 +47,7 @@ export default function Confimation() {
   const handleChange = (e) => {
     setForm({
       ...form,
-      receiverId: receiver,
-      [e.target.name]: e.target.value,
+      pin: e,
     });
   };
 
@@ -54,10 +55,12 @@ export default function Confimation() {
     console.log(form);
   };
 
-  const totalBalance = balance.totalIncome - balance.totalExpense;
-  const totalBalances = totalBalance.toLocaleString(undefined, {
-    maximumFractionDigits: 2,
-  });
+  console.log(data);
+
+  const amount = Cookies.get("amount");
+  const notes = Cookies.get("notes");
+  const balanceLeft = balance.totalIncome - amount;
+  const currentDate = new Date().toLocaleString() + "";
 
   const imageUser = `${process.env.URL_CLOUDINARY}/${data.image}`;
   const imageDefault = `https://ui-avatars.com/api/?name=${data.firstName}&background=random&size=44`;
@@ -113,7 +116,116 @@ export default function Confimation() {
                 </div>
               </div>
               {/* Transfer Form */}
-              <p className="mt-3 h5">Details</p>
+              <p className="my-3 h5">Details</p>
+              <div className="border rounded-3 py-2 px-3 shadow mb-3">
+                <p className="p-transaction">Amount</p>
+                <p className="h4 mt-2">{currency.format(amount)}</p>
+              </div>
+
+              <div className="border rounded-3 py-2 px-3 shadow mb-3">
+                <p className="p-transaction">Balance Left</p>
+                <p className="h4 mt-2">{currency.format(balanceLeft)}</p>
+              </div>
+
+              <div className="border rounded-3 py-2 px-3 shadow mb-3">
+                <p className="p-transaction">Date & Time</p>
+                <p className="h4 mt-2">{currentDate}</p>
+              </div>
+
+              <div className="border rounded-3 py-2 px-3 shadow mb-3">
+                <p className="p-transaction">Notes</p>
+                <p className="h4 mt-2">{notes}</p>
+              </div>
+
+              <div className="mt-5">
+                <div className="text-end">
+                  <button
+                    type="button"
+                    className="btn btn-primary background-blue w-25"
+                    data-bs-toggle="modal"
+                    data-bs-target="#PINConfirmationModal"
+                  >
+                    Continue
+                  </button>
+                </div>
+
+                <div
+                  className="modal fade"
+                  id="PINConfirmationModal"
+                  tabindex="-1"
+                  aria-labelledby="PINConfirmationModalLabel"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1
+                          className="modal-title fs-5"
+                          id="PINConfirmationModalLabel"
+                        >
+                          Enter PIN to Transfer
+                        </h1>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        Enter your 6 digits PIN for confirmation to continue
+                        transfering money.
+                        <div className="my-5">
+                          <PinInput
+                            length={6}
+                            initialValue=""
+                            // secret
+                            type="numeric"
+                            inputMode="number"
+                            style={{ padding: "10px" }}
+                            inputStyle={{
+                              borderColor: "#DADADA",
+                              borderRadius: "5px",
+                              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+                              color: "black",
+                              margin: "0 10px",
+                            }}
+                            inputFocusStyle={{ borderColor: "blue" }}
+                            onComplete={(value, index) => {
+                              console.log(
+                                "Completed! Value: ",
+                                value,
+                                " Index: ",
+                                index
+                              );
+                            }}
+                            onChange={(value, index) => {
+                              console.log(
+                                "Changed! Value: ",
+                                value,
+                                " Index: ",
+                                index
+                              );
+                              handleChange(value);
+                            }}
+                            autoSelect={true}
+                            regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                          />
+                        </div>
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-primary background-blue w-25"
+                          onClick={handleSubmit}
+                        >
+                          Continue
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
