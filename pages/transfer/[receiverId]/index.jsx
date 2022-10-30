@@ -12,6 +12,7 @@ import { getUserBalance } from "stores/action/user";
 //components
 import SideNavbar from "components/SideNavbar";
 import { useRouter } from "next/router";
+import currency from "utils/currency";
 
 //images
 
@@ -59,10 +60,7 @@ export default function TransferDetail() {
   };
 
   const totalBalance = balance.totalIncome - balance.totalExpense;
-  const totalBalances = totalBalance.toLocaleString(undefined, {
-    maximumFractionDigits: 2,
-  });
-
+  const totalBalances = currency.format(totalBalance);
   const imageUser = `${process.env.URL_CLOUDINARY}/${data.image}`;
   const imageDefault = `https://ui-avatars.com/api/?name=${data.firstName}&background=random&size=44`;
 
@@ -131,7 +129,7 @@ export default function TransferDetail() {
                   max={totalBalance}
                   onChange={handleChange}
                 />
-                <p className="fw-bold">Rp. {totalBalances} Available</p>
+                <p className="fw-bold">{totalBalances} Available</p>
                 <input
                   type="text"
                   name="notes"
