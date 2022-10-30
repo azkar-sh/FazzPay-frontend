@@ -63,8 +63,6 @@ export default function UserProfile() {
     });
   };
 
-  console.log(newImage);
-
   const imageUser = `${process.env.URL_CLOUDINARY}/${user.image}`;
   const imageDefault = `https://ui-avatars.com/api/?name=${user.firstName}&background=random&size=44`;
 
