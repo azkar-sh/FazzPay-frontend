@@ -77,7 +77,7 @@ export default function Header() {
                   <p className="p-transaction fw-bold">
                     {user.firstName} {user.lastName}
                   </p>{" "}
-                  <p>{user.noTelp}</p>
+                  <p>{user.noTelp ? user.noTelp : "-"}</p>
                 </div>
                 <div className="col-2">
                   <Image
@@ -107,51 +107,6 @@ export default function Header() {
           )}
         </div>
       </nav>
-      {/* <div className="container-fluid bg-light shadow">
-        <div className="py-3 container">
-          <div className="d-flex flex-row justify-content-between">
-            <button
-              className="btn fw-bold text-primary"
-              onClick={() => handleNav("")}
-            >
-              FazzPay
-            </button>
-            <div>
-              {isLogin ? (
-                <>
-                  <button
-                    className="btn btn-outline-primary me-3 px-4"
-                    onClick={() => handleNav("home")}
-                  >
-                    Home
-                  </button>
-                  <button
-                    className="btn btn-outline-danger me-3 px-4"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className="btn btn-outline-primary me-3 px-4"
-                    onClick={() => handleNav("login")}
-                  >
-                    Login
-                  </button>
-                  <button
-                    className="btn btn-outline-primary background-blue text-white px-3"
-                    onClick={() => handleNav("register")}
-                  >
-                    Signup
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </div> */}
     </header>
   );
 }

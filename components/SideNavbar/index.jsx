@@ -1,13 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Router from "next/router";
+import Cookies from "js-cookie";
 
 //Images
 import gridIcon from "../../assets/icons/grid-icon.png";
 import arrowUp from "../../assets/icons/arrow-up.png";
 import plusIcon from "../../assets/icons/plus-icon.png";
 import userIcon from "../../assets/icons/user-icon.png";
-import Cookies from "js-cookie";
+import logoutIcon from "../../assets/icons/logout-icon.png";
+import { useState } from "react";
 
 export default function SideNavbar() {
   const handleNav = (path) => {
@@ -27,7 +29,7 @@ export default function SideNavbar() {
   return (
     <>
       <div className="container">
-        <div className="d-flex flex-column" style={{ height: "75vh" }}>
+        <div className="d-flex flex-column" style={{ height: "60vh" }}>
           <div className="d-flex align-items-center my-3 text-left">
             <Image src={gridIcon} alt="grid-icon" />
             <button
@@ -66,8 +68,11 @@ export default function SideNavbar() {
 
         <div className="d-flex flex-column my-auto">
           <div className="d-flex align-items-center">
-            <Image src={gridIcon} alt="grid-icon" />
-            <button className="btn w-100 text-start" onClick={handleLogout}>
+            <Image src={logoutIcon} alt="grid-icon" />
+            <button
+              className="btn w-100 text-start text-danger"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           </div>

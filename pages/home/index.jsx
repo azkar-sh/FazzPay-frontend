@@ -52,7 +52,7 @@ export default function Home() {
     Router.push(`/${path}`);
   };
 
-  const totalBalance = balance.totalIncome - balance.totalExpense;
+  const totalBalance = balance?.totalIncome - balance?.totalExpense;
 
   return (
     <Layout>
@@ -107,14 +107,14 @@ export default function Home() {
                       <p>Income</p>
                       <p className="fw-bold">
                         {" "}
-                        {currency.format(balance.totalIncome)}{" "}
+                        {currency.format(balance?.totalIncome)}{" "}
                       </p>
                     </div>
                     <div className="col-6">
                       <p>Expence</p>
                       <p className="fw-bold">
                         {" "}
-                        {currency.format(balance.totalExpense)}{" "}
+                        {currency.format(balance?.totalExpense)}{" "}
                       </p>
                     </div>
                     <Chart />

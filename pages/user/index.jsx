@@ -38,6 +38,16 @@ export default function UserProfile() {
     Router.push(path);
   };
 
+  const handleLogout = () => {
+    const logout = window.confirm("Do you want to log out?");
+    if (logout) {
+      Cookies.remove("token", "id", "receiverId");
+      localStorage.clear();
+      Router.push("login");
+    } else {
+    }
+  };
+
   const handleInputImage = (e) => {
     const { files } = e.target;
     setNewImage(e.target.files[0]);
@@ -191,7 +201,10 @@ export default function UserProfile() {
               <button className="btn btn-secondary mb-3 py-2">
                 Change PIN
               </button>
-              <button className="btn btn-outline-danger mb-3 py-2">
+              <button
+                className="btn btn-outline-danger mb-3 py-2"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </div>
