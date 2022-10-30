@@ -9,17 +9,6 @@ import successIcon from "../../../assets/icons/success-icon.png";
 import authBackground from "../../../assets/images/auth-background.png";
 
 export default function UpdatedPin() {
-  const handleSubmit = async () => {
-    try {
-      const result = await axiosClient.patch(`/user/pin/${userId}`, form);
-      alert(result.data.msg);
-      console.log(form);
-      //   Router.push("/home");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleNavigate = (path) => {
     Router.push(`/${path}`);
   };

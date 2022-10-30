@@ -27,8 +27,6 @@ export default function UserProfile() {
       dispatch(getUserDataById(Cookies.get("id")))
         .then((res) => setUser(res.value.data.data))
         .catch((err) => console.log(err));
-
-      dispatch();
     } catch (error) {
       console.log(error);
     }
@@ -196,7 +194,10 @@ export default function UserProfile() {
               >
                 Change Password
               </button>
-              <button className="btn btn-secondary mb-3 py-2">
+              <button
+                className="btn btn-secondary mb-3 py-2"
+                onClick={() => handleNav("update-pin")}
+              >
                 Change PIN
               </button>
               <button

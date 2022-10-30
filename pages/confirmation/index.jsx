@@ -7,16 +7,20 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import { getUserDataById } from "stores/action/user";
+import { checkPIN, getUserDataById } from "stores/action/user";
 import { getUserBalance } from "stores/action/user";
 
 //components
 import SideNavbar from "components/SideNavbar";
 import currency from "utils/currency";
+import { transferBalance } from "stores/action/history";
+import { Router, useRouter } from "next/router";
 
 //images
 
 export default function Confimation() {
+  const router = useRouter({});
+
   const [data, setData] = useState({});
   const [balance, setBalance] = useState({});
   const [form, setForm] = useState({});
@@ -25,6 +29,8 @@ export default function Confimation() {
 
   const receiver = Cookies.get("receiverId");
   const userId = Cookies.get("id");
+  const amount = Cookies.get("amount");
+  const notes = Cookies.get("notes");
 
   useEffect(() => {
     getData();
@@ -51,14 +57,28 @@ export default function Confimation() {
     });
   };
 
+  const transferData = useState({
+    receiverId: receiver,
+    amount: amount,
+    notes: notes,
+  });
+
   const handleSubmit = () => {
-    console.log(form);
+    dispatch(checkPIN(form.pin))
+      .then((response) => {
+        alert(response.value.data.msg);
+
+        dispatch(transferBalance(transferData[0])).then((response) => {
+          alert(response.value.data.msg);
+          router.push("/home").then(location.reload());
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Wrong PIN!");
+      });
   };
 
-  console.log(data);
-
-  const amount = Cookies.get("amount");
-  const notes = Cookies.get("notes");
   const balanceLeft = balance.totalIncome - amount;
   const currentDate = new Date().toLocaleString() + "";
 
@@ -191,21 +211,8 @@ export default function Confimation() {
                               margin: "0 10px",
                             }}
                             inputFocusStyle={{ borderColor: "blue" }}
-                            onComplete={(value, index) => {
-                              console.log(
-                                "Completed! Value: ",
-                                value,
-                                " Index: ",
-                                index
-                              );
-                            }}
+                            onComplete={(value, index) => {}}
                             onChange={(value, index) => {
-                              console.log(
-                                "Changed! Value: ",
-                                value,
-                                " Index: ",
-                                index
-                              );
                               handleChange(value);
                             }}
                             autoSelect={true}

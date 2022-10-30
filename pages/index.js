@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "layout";
 import Image from "next/image";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 //Images
 import landingBanner from "assets/images/landing-banner.png";
@@ -16,8 +16,9 @@ import lockRounded from "assets/icons/lock-rounded.png";
 import downloadRounded from "assets/icons/download-rounded.png";
 
 export default function LandingPage() {
+  const router = useRouter();
   const handleRegister = () => {
-    Router.push("/register");
+    router.push("/register");
   };
 
   return (

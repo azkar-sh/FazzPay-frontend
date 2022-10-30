@@ -3,8 +3,8 @@ import Image from "next/image";
 import currency from "utils/currency";
 
 export default function TransactionHistory(props) {
-  const handleAmountColor = (amount) => {
-    if (amount < 0) {
+  const handleAmountColor = () => {
+    if (props.data.type !== "accept" && props.data.type !== "topup") {
       return "fw-bold text-danger";
     } else {
       return "fw-bold color-blue";

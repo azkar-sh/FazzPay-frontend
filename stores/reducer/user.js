@@ -76,6 +76,42 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
       };
 
+    case "CHECK_PIN_PENDING":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "CHECK_PIN_REJECTED":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "CHECK_PIN_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+      };
+
+    case "UPDATE_PIN_PENDING":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "UPDATE_PIN_REJECTED":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "UPDATE_PIN_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+      };
+
     default:
       return state;
   }

@@ -23,6 +23,7 @@ export default function Home() {
   const [user, setUser] = useState({});
   const [data, setData] = useState({});
   const [balance, setBalance] = useState({});
+  const [form, setForm] = useState({});
 
   const dispatch = useDispatch();
 
@@ -36,7 +37,7 @@ export default function Home() {
         .then((res) => setUser(res.value.data.data))
         .catch((err) => console.log(err));
 
-      dispatch(getHistoryData(1, 20, "MONTH"))
+      dispatch(getHistoryData(1, 50, "MONTH"))
         .then((res) => setData(res.value.data.data))
         .catch((err) => console.log(err));
 
@@ -46,6 +47,17 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = () => {
+    console.log(form);
   };
 
   const handleNav = (path) => {
@@ -71,7 +83,7 @@ export default function Home() {
                   <div className="col-9">
                     <small>Balance</small>
                     <h2>{currency.format(totalBalance)}</h2>
-                    <small>{user.noTelp}</small>
+                    <small>{user.noTelp ? user.noTelp : "-"}</small>
                   </div>
                   <div className="col-3">
                     <button
@@ -86,7 +98,11 @@ export default function Home() {
                       />{" "}
                       Transfer
                     </button>
-                    <button className="btn btn-outline-primary d-flex align-items-center w-75 justify-content-center btn-balance mt-3">
+                    <button
+                      className="btn btn-outline-primary d-flex align-items-center w-75 justify-content-center btn-balance mt-3"
+                      data-bs-toggle="modal"
+                      data-bs-target="#TopUpModal"
+                    >
                       <Image
                         src={plusIcon}
                         alt="grid-icon"
@@ -95,6 +111,54 @@ export default function Home() {
                       />{" "}
                       Top Up
                     </button>
+                    <div className="mt-5">
+                      <div
+                        className="modal fade"
+                        id="TopUpModal"
+                        tabindex="-1"
+                        aria-labelledby="TopUpModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-dialog-centered">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h1
+                                className="modal-title fs-5 text-dark"
+                                id="TopUpModalLabel"
+                              >
+                                Top Up
+                              </h1>
+                              <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div className="modal-body text-dark">
+                              Enter the amount of money, and click submit
+                              <div className="my-3">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  name="amount"
+                                  onChange={handleChange}
+                                />
+                              </div>
+                            </div>
+                            <div className="modal-footer">
+                              <button
+                                type="button"
+                                className="btn btn-primary background-blue w-25"
+                                onClick={handleSubmit}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

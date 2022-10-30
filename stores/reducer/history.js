@@ -22,6 +22,24 @@ const history = (state = initialState, action) => {
         data: {},
       };
 
+    case "TRANSFER_BALANCE_PENDING":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "TRANSFER_BALANCE_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+      };
+
+    case "TRANSFER_BALANCE_REJECTED":
+      return {
+        ...state,
+        data: {},
+      };
+
     default:
       return state;
   }

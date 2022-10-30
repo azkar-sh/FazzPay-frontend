@@ -46,7 +46,8 @@ export default function TransactionHistory(props) {
             className="p-transaction fw-bold link-selected"
             onClick={handleDetail}
           >
-            {props.data.firstName} {props.data.lastName}
+            {props.data.firstName ? props.data.firstName : "-"}{" "}
+            {props.data.lastName}
           </p>
           <p className="p-transaction">
             {props.data.noTelp ? props.data.noTelp : "-"}

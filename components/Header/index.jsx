@@ -40,7 +40,12 @@ export default function Header() {
     <header>
       <nav className="navbar bg-light py-3 shadow">
         <div className="container rounded-3">
-          <a className="navbar-brand color-blue fw-bold">FazzPay</a>
+          <a
+            className="navbar-brand color-blue fw-bold link-selected"
+            onClick={() => handleNav("")}
+          >
+            FazzPay
+          </a>
           {isLogin ? (
             <>
               <div

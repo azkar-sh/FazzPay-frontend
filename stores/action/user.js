@@ -29,3 +29,17 @@ export const updateUserImage = (id, data) => {
     payload: axiosClient.patch(`/user/image/${id}`, data),
   };
 };
+
+export const checkPIN = (data) => {
+  return {
+    type: "CHECK_PIN",
+    payload: axiosClient.get(`/user/pin/${data}`),
+  };
+};
+
+export const updatePIN = (id, data) => {
+  return {
+    type: "UPDATE_PIN",
+    payload: axiosClient.patch(`/user/pin/${id}`, data),
+  };
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Router from "next/router";
+// import router from "next/router";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -10,10 +10,13 @@ import { login } from "stores/action/auth";
 
 //Imagess
 import authBackground from "../../assets/images/auth-background.png";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
+
+  const router = useRouter();
 
   const handleChange = (e) => {
     setForm({
@@ -29,13 +32,13 @@ export default function Login() {
         dispatch(getUserDataById(response.value.data.data.id));
         Cookies.set("token", response.value.data.data.token);
         Cookies.set("id", response.value.data.data.id);
-        Router.push("/home");
+        router.push("/home");
       })
       .catch((error) => console.log(error));
   };
 
   const handleNavigate = (path) => {
-    Router.push(`/${path}`);
+    router.push(`/${path}`);
   };
 
   return (

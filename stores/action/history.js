@@ -8,3 +8,17 @@ export const getHistoryData = (page, limit, filter) => {
     ),
   };
 };
+
+export const transferBalance = (data) => {
+  return {
+    type: "TRANSFER_BALANCE",
+    payload: axiosClient.post(`/transaction/transfer`, data),
+  };
+};
+
+// export const topUp = (data) => {
+//   return {
+//     type: "TOP_UP",
+//     payload: axiosClient.post(`/transaction/top-up`, data),
+//   };
+// };

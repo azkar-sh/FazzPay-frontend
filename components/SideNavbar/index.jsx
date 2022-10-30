@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
 //Images
@@ -9,11 +9,11 @@ import arrowUp from "../../assets/icons/arrow-up.png";
 import plusIcon from "../../assets/icons/plus-icon.png";
 import userIcon from "../../assets/icons/user-icon.png";
 import logoutIcon from "../../assets/icons/logout-icon.png";
-import { useState } from "react";
 
 export default function SideNavbar() {
+  const router = useRouter();
   const handleNav = (path) => {
-    Router.push(path);
+    router.push(path);
   };
 
   const handleLogout = () => {
