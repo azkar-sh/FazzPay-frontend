@@ -32,12 +32,9 @@ export default function Login() {
         dispatch(getUserDataById(response.value.data.data.id));
         Cookies.set("token", response.value.data.data.token);
         Cookies.set("id", response.value.data.data.id);
-        Cookies.set("pin", response.value.data.data.pin);
-        {
-          response.value.data.pin === null
-            ? router.push("update-pin")
-            : router.push("/home");
-        }
+        response.value.data.data.pin === null
+          ? router.push("update-pin") //page for create pin
+          : router.push("/home");
       })
       .catch((error) => alert("Email or Password incorrect!"));
   };
