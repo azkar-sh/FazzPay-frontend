@@ -32,7 +32,12 @@ export default function Login() {
         dispatch(getUserDataById(response.value.data.data.id));
         Cookies.set("token", response.value.data.data.token);
         Cookies.set("id", response.value.data.data.id);
-        router.push("/home");
+        Cookies.set("pin", response.value.data.data.pin);
+        {
+          response.value.data.pin === null
+            ? router.push("update-pin")
+            : router.push("/home");
+        }
       })
       .catch((error) => console.log(error));
   };

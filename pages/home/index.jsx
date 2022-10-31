@@ -14,6 +14,8 @@ import Chart from "components/Chart";
 
 import arrowUp from "../../assets/icons/arrow-up.png";
 import plusIcon from "../../assets/icons/plus-icon.png";
+import upIcon from "../../assets/icons/up-icon.png";
+import downIcon from "../../assets/icons/down-icon.png";
 
 import { getUserDataById } from "stores/action/user";
 import { getHistoryData } from "stores/action/history";
@@ -168,6 +170,7 @@ export default function Home() {
                 <div className="col-6 border rounded-3 px-3 py-3 me-1 shadow bg-white">
                   <div className="row">
                     <div className="col-6">
+                      <Image src={downIcon} alt="income" />
                       <p>Income</p>
                       <p className="fw-bold">
                         {" "}
@@ -175,6 +178,7 @@ export default function Home() {
                       </p>
                     </div>
                     <div className="col-6">
+                      <Image src={upIcon} alt="expence" />
                       <p>Expence</p>
                       <p className="fw-bold">
                         {" "}

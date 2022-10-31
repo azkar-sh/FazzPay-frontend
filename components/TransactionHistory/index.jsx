@@ -47,7 +47,7 @@ export default function TransactionHistory(props) {
             {props.data.firstName} {props.data.lastName}
           </p>
           <p className="p-transaction">
-            {props.data.status ? props.data.status : "-"}
+            {props.data.type ? props.data.type : "-"}
           </p>
         </div>
 
