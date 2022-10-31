@@ -18,7 +18,7 @@ import upIcon from "../../assets/icons/up-icon.png";
 import downIcon from "../../assets/icons/down-icon.png";
 
 import { getUserDataById } from "stores/action/user";
-import { getHistoryData } from "stores/action/history";
+import { getHistoryData, topUp } from "stores/action/history";
 import { getUserBalance } from "stores/action/user";
 
 export default function Home() {
@@ -59,7 +59,11 @@ export default function Home() {
   };
 
   const handleSubmit = () => {
-    console.log(form);
+    dispatch(topUp(form))
+      .then((res) =>
+        alert(`Please top up on ${res.value.data.data.redirectUrl}`)
+      )
+      .catch((err) => console.log(err));
   };
 
   const handleNav = (path) => {

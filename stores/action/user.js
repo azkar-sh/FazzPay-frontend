@@ -1,10 +1,10 @@
 import axiosClient from "../../utils/axios";
 
-export const getUserData = () => {
+export const getUserData = (search) => {
   return {
     type: "GET_USER_DATA",
     payload: axiosClient.get(
-      "/user?page=1&limit=50&search=&sort=firstName ASC"
+      `/user?page=1&limit=50&search=${search}&sort=firstName ASC`
     ),
   };
 };
@@ -41,5 +41,12 @@ export const updatePIN = (id, data) => {
   return {
     type: "UPDATE_PIN",
     payload: axiosClient.patch(`/user/pin/${id}`, data),
+  };
+};
+
+export const deleteImageUser = (id) => {
+  return {
+    type: "DELETE_USER_IMAGE",
+    payload: axiosClient.delete(`/user/image/${id}`),
   };
 };

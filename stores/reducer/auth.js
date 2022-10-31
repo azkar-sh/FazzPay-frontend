@@ -30,6 +30,29 @@ const auth = (state = initialState, action) => {
         message: action.payload.data.msg,
       };
 
+    case "LOGOUT_PENDING":
+      return {
+        ...state,
+        data: {},
+        isLogin: true,
+        message: "Loading...",
+      };
+
+    case "LOGOUT_REJECTED":
+      return {
+        ...state,
+        data: {},
+        isLogin: true,
+        message: action.payload.reponse.data.msg,
+      };
+
+    case "LOGOUT_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+        isLogin: false,
+        message: action.payload.data.msg,
+      };
     default:
       return state;
   }

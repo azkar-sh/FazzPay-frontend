@@ -112,6 +112,24 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
       };
 
+    case "DELETE_USER_IMAGE_PENDING":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "DELETE_USER_IMAGE_REJECTED":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "DELETE_USER_IMAGE_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+      };
+
     default:
       return state;
   }

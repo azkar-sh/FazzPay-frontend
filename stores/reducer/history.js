@@ -40,6 +40,23 @@ const history = (state = initialState, action) => {
         data: {},
       };
 
+    case "TOP_UP_PENDING":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "TOP_UP_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+      };
+
+    case "TOP_UP_REJECTED":
+      return {
+        ...state,
+        data: {},
+      };
     default:
       return state;
   }

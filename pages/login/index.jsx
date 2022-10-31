@@ -39,7 +39,7 @@ export default function Login() {
             : router.push("/home");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => alert("Email or Password incorrect!"));
   };
 
   const handleNavigate = (path) => {

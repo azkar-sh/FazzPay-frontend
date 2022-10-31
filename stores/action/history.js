@@ -16,9 +16,9 @@ export const transferBalance = (data) => {
   };
 };
 
-// export const topUp = (data) => {
-//   return {
-//     type: "TOP_UP",
-//     payload: axiosClient.post(`/transaction/top-up`, data),
-//   };
-// };
+export const topUp = (data) => {
+  return {
+    type: "TOP_UP",
+    payload: axiosClient.post(`/transaction/top-up`, data),
+  };
+};

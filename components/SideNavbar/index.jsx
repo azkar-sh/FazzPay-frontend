@@ -9,6 +9,8 @@ import arrowUp from "../../assets/icons/arrow-up.png";
 import plusIcon from "../../assets/icons/plus-icon.png";
 import userIcon from "../../assets/icons/user-icon.png";
 import logoutIcon from "../../assets/icons/logout-icon.png";
+import { useDispatch } from "react-redux";
+import { logout } from "stores/action/auth";
 
 export default function SideNavbar() {
   const router = useRouter();
@@ -16,12 +18,16 @@ export default function SideNavbar() {
     router.push(path);
   };
 
+  const dispatch = useDispatch();
+
   const handleLogout = () => {
-    const logout = window.confirm("Do you want to log out?");
-    if (logout) {
-      Cookies.remove("token", "id", "receiverId");
-      localStorage.clear();
-      Router.push("login");
+    const logoutConfirm = window.confirm("Do you want to log out?");
+    if (logoutConfirm) {
+      dispatch(logout()).then(() => {
+        Cookies.remove("token", "id", "receiverId");
+        localStorage.clear();
+        Router.push("login");
+      });
     } else {
     }
   };

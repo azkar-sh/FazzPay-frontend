@@ -7,10 +7,15 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import { updateUserImage, getUserDataById } from "stores/action/user";
+import {
+  updateUserImage,
+  getUserDataById,
+  deleteImageUser,
+} from "stores/action/user";
 
 //components
 import SideNavbar from "components/SideNavbar";
+import { logout } from "stores/action/auth";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
@@ -37,11 +42,13 @@ export default function UserProfile() {
   };
 
   const handleLogout = () => {
-    const logout = window.confirm("Do you want to log out?");
-    if (logout) {
-      Cookies.remove("token", "id", "receiverId");
-      localStorage.clear();
-      Router.push("login");
+    const logoutConfirm = window.confirm("Do you want to log out?");
+    if (logoutConfirm) {
+      dispatch(logout()).then(() => {
+        Cookies.remove("token", "id", "receiverId");
+        localStorage.clear();
+        Router.push("login");
+      });
     } else {
     }
   };
@@ -59,6 +66,16 @@ export default function UserProfile() {
       dispatch(getUserDataById(user.id));
       location.reload();
     });
+  };
+
+  const handleDeleteImage = () => {
+    const deleteConfirm = window.confirm("Do you want delete image?");
+    if (deleteConfirm) {
+      dispatch(deleteImageUser(user.id)).then(() => {
+        dispatch(getUserDataById(user.id));
+        location.reload();
+      });
+    }
   };
 
   const imageUser = `${process.env.URL_CLOUDINARY}/${user.image}`;
@@ -164,6 +181,12 @@ export default function UserProfile() {
                         </div>
                       </div>
                       <div className="modal-footer">
+                        <button
+                          className="btn btn-outline-danger"
+                          onClick={handleDeleteImage}
+                        >
+                          Delete Image
+                        </button>
                         <button
                           type="button"
                           className="btn btn-primary background-blue w-25"

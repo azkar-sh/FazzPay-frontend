@@ -21,7 +21,7 @@ export default function Transfer() {
 
   const getData = () => {
     try {
-      dispatch(getUserData())
+      dispatch(getUserData(""))
         .then((response) => setData(response.value.data.data))
         .catch((err) => console.log(err));
     } catch (error) {
