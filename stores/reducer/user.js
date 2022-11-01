@@ -148,6 +148,24 @@ const user = (state = initialState, action) => {
         data: action.payload.data.data,
       };
 
+    case "UPDATE_PHONE_PENDING":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "UPDATE_PHONE_REJECTED":
+      return {
+        ...state,
+        data: {},
+      };
+
+    case "UPDATE_PHONE_FULFILLED":
+      return {
+        ...state,
+        data: action.payload.data.data,
+      };
+
     default:
       return state;
   }

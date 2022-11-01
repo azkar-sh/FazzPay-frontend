@@ -57,3 +57,10 @@ export const updateUserPassword = (id, data) => {
     payload: axiosClient.patch(`/user/password/${id}`, data),
   };
 };
+
+export const updatePhone = (id, data) => {
+  return {
+    type: "UPDATE_PHONE",
+    payload: axiosClient.patch(`/user/profile/${id}`, data),
+  };
+};
