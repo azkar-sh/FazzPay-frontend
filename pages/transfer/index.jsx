@@ -14,25 +14,20 @@ import Cookies from "js-cookie";
 export default function Transfer() {
   const dispatch = useDispatch();
   const [data, setData] = useState({});
+  const [search, setSearch] = useState(" ");
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [search]);
 
   const getData = () => {
     try {
-      dispatch(getUserData(""))
+      dispatch(getUserData(search))
         .then((response) => setData(response.value.data.data))
         .catch((err) => console.log(err));
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleDetail = () => {
-    const receiverId = Cookies.get("id", id);
-    console.log(receiverId);
-    // Router.push("/transfer/${id}");
   };
 
   return (
@@ -50,6 +45,7 @@ export default function Transfer() {
               type="text"
               className="form-control mb-3"
               placeholder="Search Receiver"
+              onChange={(e) => setSearch(e.target.value)}
             />
             <div className="overflow-auto vh-100">
               <div className="d-flex flex-column flex-wrap">

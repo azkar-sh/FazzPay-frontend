@@ -34,3 +34,9 @@ hr {
   position: absolute;
   width: 1px;
 }
+
+.filter-history:hover {
+  cursor: pointer;
+  color: #6379f4;
+  font-weight: bold;
+}

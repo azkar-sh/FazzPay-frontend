@@ -14,7 +14,7 @@ import { getUserBalance } from "stores/action/user";
 import SideNavbar from "components/SideNavbar";
 import currency from "utils/currency";
 import { transferBalance } from "stores/action/history";
-import { Router, useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 //images
 
@@ -70,7 +70,7 @@ export default function Confimation() {
 
         dispatch(transferBalance(transferData[0])).then((response) => {
           alert(response.value.data.msg);
-          router.push("/home").then(location.reload());
+          Router.push("/home");
         });
       })
       .catch((error) => {
@@ -79,7 +79,8 @@ export default function Confimation() {
       });
   };
 
-  const balanceLeft = balance.totalIncome - amount;
+  const balanceSubTotal = balance.totalIncome - balance.totalExpense;
+  const balanceLeft = balanceSubTotal - amount;
   const currentDate = new Date().toLocaleString() + "";
 
   const imageUser = `${process.env.URL_CLOUDINARY}/${data.image}`;

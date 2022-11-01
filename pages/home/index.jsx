@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import currency from "utils/currency";
 
 //components
@@ -28,6 +28,7 @@ export default function Home() {
   const [form, setForm] = useState({});
 
   const dispatch = useDispatch();
+  const router = useRouter;
 
   useEffect(() => {
     getData();
@@ -60,9 +61,7 @@ export default function Home() {
 
   const handleSubmit = () => {
     dispatch(topUp(form))
-      .then((res) =>
-        alert(`Please top up on ${res.value.data.data.redirectUrl}`)
-      )
+      .then((res) => Router.push(`${res.value.data.data.redirectUrl}`))
       .catch((err) => console.log(err));
   };
 
