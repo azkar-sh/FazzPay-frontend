@@ -75,13 +75,13 @@ export default function Home() {
                   </li>
                   <li
                     className="mx-3 filter-history"
-                    onClick={() => setFilterType("WEEK")}
+                    onClick={() => setFilterType("MONTH")}
                   >
                     By Month
                   </li>
                   <li
                     className="mx-3 my-2 filter-history"
-                    onClick={() => setFilterType("WEEK")}
+                    onClick={() => setFilterType("YEAR")}
                   >
                     By Year
                   </li>
