@@ -6,6 +6,8 @@ import Router from "next/router";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   updateUserImage,
@@ -22,14 +24,15 @@ export default function UserProfile() {
   const [user, setUser] = useState({});
   const [imagePreview, setImagePreview] = useState("");
   const [newImage, setNewImage] = useState({});
+  const userId = Cookies.get("id");
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [userId]);
 
   const getData = () => {
     try {
-      dispatch(getUserDataById(Cookies.get("id")))
+      dispatch(getUserDataById(userId))
         .then((res) => setUser(res.value.data.data))
         .catch((err) => console.log(err));
     } catch (error) {
@@ -62,18 +65,22 @@ export default function UserProfile() {
   const handleUpdateImage = () => {
     const imageData = new FormData();
     imageData.append("image", newImage);
-    dispatch(updateUserImage(user.id, imageData)).then(() => {
+    dispatch(updateUserImage(user.id, imageData)).then((response) => {
+      toast.success(response.value.data.msg, {
+        position: toast.POSITION.TOP_CENTER,
+      });
       dispatch(getUserDataById(user.id));
-      location.reload();
     });
   };
 
   const handleDeleteImage = () => {
     const deleteConfirm = window.confirm("Do you want delete image?");
     if (deleteConfirm) {
-      dispatch(deleteImageUser(user.id)).then(() => {
+      dispatch(deleteImageUser(user.id)).then((response) => {
+        toast.success(response.value.data.msg, {
+          position: toast.POSITION.TOP_CENTER,
+        });
         dispatch(getUserDataById(user.id));
-        location.reload();
       });
     }
   };
@@ -193,6 +200,7 @@ export default function UserProfile() {
                           onClick={handleUpdateImage}
                         >
                           Continue
+                          <ToastContainer />
                         </button>
                       </div>
                     </div>

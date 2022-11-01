@@ -50,3 +50,10 @@ export const deleteImageUser = (id) => {
     payload: axiosClient.delete(`/user/image/${id}`),
   };
 };
+
+export const updateUserPassword = (id, data) => {
+  return {
+    type: "UPDATE_USER_PASSWORD",
+    payload: axiosClient.patch(`/user/password/${id}`, data),
+  };
+};

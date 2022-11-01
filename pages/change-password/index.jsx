@@ -1,41 +1,44 @@
 import React from "react";
 import Layout from "layout";
 import Cookies from "js-cookie";
-import Router from "next/router";
 import { useDispatch } from "react-redux";
-import { getUserDataById } from "stores/action/user";
-import { useEffect } from "react";
+import { updateUserPassword } from "stores/action/user";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //components
 import SideNavbar from "components/SideNavbar";
 
 export default function ChangePassword() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState({});
+  const userId = Cookies.get("id");
+  const [form, setForm] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = () => {
-    try {
-      dispatch(getUserDataById(Cookies.get("id")))
-        .then((res) => setUser(res.value.data.data))
-        .catch((err) => console.log(err));
-
-      dispatch();
-    } catch (error) {
-      console.log(error);
-    }
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleNav = (path) => {
-    Router.push(path);
+  const handleSubmit = () => {
+    dispatch(updateUserPassword(userId, form))
+      .then((response) => {
+        toast.success(response.value.data.msg, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((error) =>
+        toast.error(error.response.data.msg, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
-
-  const imageUser = process.env.URL_CLOUDINARY;
-  // console.log(user.image);
 
   return (
     <Layout>
@@ -53,24 +56,35 @@ export default function ChangePassword() {
                 You must enter your current password and then type your new
                 password twice.
               </p>
-              <div className="container text-center">
+              <div className="container">
                 <input
-                  type="text"
+                  type="password"
+                  name="oldPassword"
                   placeholder="Current password"
                   className="form-control w-50 border-0 border-bottom"
+                  onChange={handleChange}
                 />
                 <input
-                  type="text"
+                  type="password"
                   name="newPassword"
                   placeholder="New Password"
                   className="form-control w-50 my-5 border-0 border-bottom"
+                  onChange={handleChange}
                 />
                 <input
-                  type="text"
-                  name="confirmNewPassword"
+                  type="password"
+                  name="confirmPassword"
                   placeholder="Repeat new password"
                   className="form-control w-50 border-0 border-bottom"
+                  onChange={handleChange}
                 />
+                <button
+                  className="btn btn-primary background-blue mt-5 w-25"
+                  onClick={handleSubmit}
+                >
+                  Continue
+                  <ToastContainer />
+                </button>
               </div>
             </div>
           </div>

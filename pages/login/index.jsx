@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { getUserDataById } from "stores/action/user";
 import { login } from "stores/action/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //Imagess
 import authBackground from "../../assets/images/auth-background.png";
@@ -28,7 +30,9 @@ export default function Login() {
   const handleSubmit = () => {
     dispatch(login(form))
       .then((response) => {
-        alert(response.value.data.msg);
+        toast.success(response.value.data.msg, {
+          position: toast.POSITION.TOP_CENTER,
+        });
         dispatch(getUserDataById(response.value.data.data.id));
         Cookies.set("token", response.value.data.data.token);
         Cookies.set("id", response.value.data.data.id);
@@ -36,7 +40,11 @@ export default function Login() {
           ? router.push("update-pin") //page for create pin
           : router.push("/home");
       })
-      .catch((error) => alert("Email or Password incorrect!"));
+      .catch((error) =>
+        toast.error(error.response.data.msg, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
 
   const handleNavigate = (path) => {
@@ -101,6 +109,7 @@ export default function Login() {
                 onClick={handleSubmit}
               >
                 Login
+                <ToastContainer />
               </button>
 
               <div className="text-center">
